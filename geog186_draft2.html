@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>GEOG 186 Final Project, Zack Dinh</title>
+    <link rel="stylesheet" href="main_2.css">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+    <p> </p>
+    <h1 style="text-align:center;">Modeling traffic-related black carbon emissions at the Port of Oakland</h1>
+    <h4 style="text-align:center;">Zack Dinh | Sam Fernandes | Rebecca Sugrue | Dajie Sun</h4>
+    <hr width="100%">
+    <p>Traffic-related emissions related to diesel activity from maritime vessels and ground vehicles originating from the Port of Oakland is harmful to the environment and health of neighboring communities. In this project we analyzed activity at the Port from movement data and modeled the black carbon emissions of this activity using vehicle and engine characteristics. We belive this method provides valuable and independent monitoring capability. The map below presents a composite of the the available vehicle activity at the Port for one month (vessels: June 2017, ground vehicles: January 2019).</p>
+    <p> </p>
+    <img src="https://66.media.tumblr.com/65c218846899b6ec5cd9b9a408198303/tumblr_pquehg5AC01rxl92fo1_1280.png">
+    <hr width="100%">
+    <p> </p>
+    <h3 style="text-align:center;">Vessel and ground vehicle movement activity at the Port of Oakland</h3>
+    <style>
+        #menu {
+            background: #fff;
+            position: absolute;
+            z-index: 1;
+            top: 468px;
+            right: 60px;
+            border-radius: 3px;
+            width: 170px;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        #menu a {
+            font-size: 12px;
+            color: #000000;
+            display: block;
+            margin: 0;
+            padding: 0;
+            padding: 10px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+        
+        #menu a:last-child {
+            border: none;
+        }
+        
+        #menu a:hover {
+            background-color: #f8f8f8;
+            color: #404040;
+        }
+        
+        #menu a.active {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        
+        #menu a.active:hover {
+            background: #808080;
+        }
+    </style>
+    <nav id="menu"></nav>
+    <div id="map" style="width: 100%; height: 700px"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiemFja2RpbmgiLCJhIjoiY2p0ZGoxMjc2MTd0azQzbW9zNWUzbm1meCJ9.wVLjaWeqoQ235YTL4n_CwQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/zackdinh/cjuivuq5h6q151fqimglnrs8l',
+            center: [-122.313, 37.809],
+            zoom: 13,
+        });
+        map.addControl(new mapboxgl.NavigationControl());
+        map.addControl(new mapboxgl.FullscreenControl());
+        map.addControl(new mapboxgl.ScaleControl({
+            position: 'bottom-right'
+        }));
+
+
+            map.on('load', function() {
+                map.addSource('Desktop-61i1ve', {
+                    type: 'vector',
+                    url: 'mapbox://zackdinh.52kum2r5'
+            });
+
+            map.addSource('bins-cobv08', {
+                type: 'vector',
+                url: 'mapbox://zackdinh.d10c483w'
+            });
+
+            map.addLayer({
+                'id': 'Bins',
+                'type': 'line',
+                'source': 'bins-cobv08',
+                'source-layer': 'bins-cobv08',
+                'layout': {
+                    'visibility': 'none',
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#86bde4',
+                    'line-width': .25
+                }
+            });
+
+            map.on('click', 'Vessel Tracks', function(e) {
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(e.features[0].properties.VesselName)
+                    .addTo(map);
+            });
+
+            // Change the cursor to a pointer when the mouse is over the states layer.
+            map.on('mouseenter', 'Vessel Tracks', function() {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'Vessel Tracks', function() {
+                map.getCanvas().style.cursor = '';
+            });
+
+            map.on('click', 'Vessel Berthing Locations', function(e) {
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(e.features[0].properties.VesselName)
+                    .addTo(map);
+            });
+
+            // Change the cursor to a pointer when the mouse is over the states layer.
+            map.on('mouseenter', 'Vessel Berthing Locations', function() {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'Vessel Berthing Locations', function() {
+                map.getCanvas().style.cursor = '';
+            });
+        });
+
+        var toggleableLayerIds = ['Vessel Tracks', 'Ground Vehicle Tracks', 'Vessel Points', 'Ground Vehicle Points'];
+
+        for (var i = 0; i < toggleableLayerIds.length; i++) {
+            var id = toggleableLayerIds[i];
+
+            var link = document.createElement('a');
+            link.href = '#';
+            link.className = 'active';
+            link.textContent = id;
+
+            link.onclick = function(e) {
+                var clickedLayer = this.textContent;
+                e.preventDefault();
+                e.stopPropagation();
+
+                var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+                if (visibility === 'visible') {
+                    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+                    this.className = '';
+                } else {
+                    this.className = 'active';
+                    map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+                }
+            };
+
+            var layers = document.getElementById('menu');
+            layers.appendChild(link);
+        }
+    </script>
+    <!--<img src="https://www.mercurynews.com/wp-content/uploads/2016/08/20121211_095601_Economy-Trade-Deficit.jpg">-->
+    <!--<h5>Container ships berthed at the Port of Oakland.</h5>-->
+    <p> </p>
+    <hr width="100%">
+    <img src= "https://66.media.tumblr.com/999eca973810d010040a8cf155f1b2f5/tumblr_pqur07EJjg1rxl92fo1_500h.jpg" width="50%" height="50%">
+    
+    <h2 style="text-align:center;">Vessel Movement Data</h2>
+    <h3 style="text-align:center;">80,850 data points, 119 unique vessels</h3>
+    <p>Vessel activity was derived from Automatic Identification System (AIS) data. A system used internationally, primarily to prevent vessel collisions. AIS is required for all vessels greater than 300 gross tonnes. Each AIS message contains: MMSI (vessel identifier), BaseDateTime (date and time), LAT (UTM latitude), LON (UTM longitude), along with vessel type, heading, speed and other useful information. We first developed a method to decode raw AIS messages using the Python package libais, and evaluated the decoder using a sample of raw AIS data. We then downloaded a full AIS dataset for June 2017 for UTM Zone 10, a total of 34,187,287 AIS messages.</p> 
+    
+    <p>From this dataset we extracted AIS messages located within the study area, yielding 559,596 AIS messages. Further subsetting of AIS messages was then performed by selecting only cargo and tanker vessel type classifications. Our final AIS dataset for June 2017 in the study area was 80,850. We identified 119 vessels based on MMSI. Cumulatively, these 119 vessels operated for a total of 3,497.8 hours at the Port. 156.6 hours was classified as maneuvering (4%), and 3,341.2 hours classified as berthed (96%). We obtained additional vessel characteristics for 108 vessels found in the Marine Traffic database, providing us with vessel dimensions, tonnage, cargo capacity, year built, owner, and builder information.</p>
+
+    <!--<img src="https://www.ttnews.com/sites/default/files/port-of-los-angeles-1200.jpg">-->
+    <!--<h5>Freight trucking activity at the Port of Oakland.</h5>-->
+    <hr width="100%">
+    
+    <img src= "https://66.media.tumblr.com/2ea71269bae0202f8b2af5ebfa8252b9/tumblr_pquqzdtBwK1rxl92fo1_500h.jpg" width="50%" height="50%">
+    <h2 style="text-align:center;">Ground Vehicle Movement Data</h2>
+    <p>Ground vehicle probe data was provided by Dr. Jane McFarlane for the month of January 2019 (January 1-30). The data lied within the study area illustrated in Figure 1. Data was not cleaned prior to access and represented all commercial and fleet activity in the study area. Time was converted to PST local time. Data included the following columns: Probe ID, Sample Date (original), Latitude(degrees), Longitude (degrees), Heading (degrees), Speed (kmph), Probe Provider (Fleet # or Commercial #), X (UTM latitude), Y(UTM longitude), and Local Time (PST).</p>
+
+    <h2 style="text-align:center;">Black Carbon Emissions Modeling</h2>
+    <hr width="100%">
+    <h2 style="text-align:center;">Data Sources</h2>
+    <p>Port information: <a href="https://www.portofoakland.com/"> Port of Oakland.</a></p>
+    <p>Vessel movement data: <a href="https://marinecadastre.gov/ais/"> MarineCadastre.gov</a></p>
+    <p>Ground vehicle movement data: Courtesy of Dr. Jane McFarlane, College of Civil & Environmental Engineering</p>
+    
+    <p>Vessel emissions estimation methodology: <a href="https://www.theicct.org/publications/GHG-emissions-global-shipping-2013-2015">Greenhouse gas emissions from global shipping, 2013–2015, ICCT</a></p>
+    <p><a href="https://github.com/zdinh/zdinh.github.io">Github repository</a></p>
+    
+    <hr width="100%">
+    <p style="text-align:center;">Spring 2019 | GEOG 186 Web Cartogrpahy | CE 263 N Scalable Spatial Analytics | University of California, Berkeley</p>
+
+</body>
+
+</html>
