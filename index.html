@@ -97,6 +97,11 @@
             center: [-122.313, 37.809],
             zoom: 13,
         });   
+        map2.addControl(new mapboxgl.NavigationControl());
+        map2.addControl(new mapboxgl.FullscreenControl());
+        map2.addControl(new mapboxgl.ScaleControl({
+            position: 'bottom-right'
+        }));
     </script>   
     
     <hr width="100%">
