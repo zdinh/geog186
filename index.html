@@ -125,7 +125,7 @@
         map2.on('click', 'bc', function(e) {
                 new mapboxgl.Popup()
                     .setLngLat(e.lngLat)
-                    .setHTML(e.features[0].properties.weekday_l)
+                    .setHTML(e.features[0].properties.weekday_bc)
                     .addTo(map2);
             });
             // Change the cursor to a pointer when the mouse is over the states layer.
