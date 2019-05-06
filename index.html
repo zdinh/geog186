@@ -98,15 +98,17 @@
     <img src= "https://66.media.tumblr.com/2ea71269bae0202f8b2af5ebfa8252b9/tumblr_pquqzdtBwK1rxl92fo1_500h.jpg" width="50%" height="50%">
     <h2 style="text-align:center;">Ground Vehicle Movement Data</h2>
     <h3 style="text-align:center;">487,410 data points, 6,336 unique vehicles</h3>
-    <p>Ground vehicle probe data was provided by Dr. Jane McFarlane for the month of January 2019 (January 1-30). The data lied within the study area illustrated in Figure 1. Data was not cleaned prior to access and represented all commercial and fleet activity in the study area. Time was converted to PST local time. Data included the following columns: Probe ID, Sample Date (original), Latitude(degrees), Longitude (degrees), Heading (degrees), Speed (kmph), Probe Provider (Fleet # or Commercial #), X (UTM latitude), Y(UTM longitude), and Local Time (PST).</p>
+    <p>Ground vehicle probe data was provided by Dr. Jane McFarlane for the month of January 2019 (January 1-30). From the original data set of x points we extracted x points within the Port of Oakland study area.</p>
     <hr width="100%">
     <img src= "https://66.media.tumblr.com/c848e5eba0ea23486bddb7fb5051918a/tumblr_pqurnliJIU1rxl92fo1_500h.jpg" width="50%" height="50%">
     <h2 style="text-align:center;">Black Carbon Emissions Modeling</h2>
     <h3 style="text-align:center;">Estimated 2,266 grams of black carbon generated per week day</h3>
     
     <img src="https://66.media.tumblr.com/6279b5e8e2f55539072d3832a06253bb/tumblr_pqv5pjPSIA1rxl92fo1_1280.jpg">
+        <p>From movement data we modeled the amount of black carbon emited from each vesse and vehicle during their operation at the port. From movement data, a vehicle's position, speed, and operating time is factored in to the emssions model. For vessels, MMSI contained in the AIS data allowed us to obtain vessel specific information </p>
     <hr width="100%">
     <h2 style="text-align:center;">Estimation of black carbon emissions at the Port of Oakland</h2>
+
     <div id="map2" style="width: 100%; height: 700px"></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiemFja2RpbmgiLCJhIjoiY2p0ZGoxMjc2MTd0azQzbW9zNWUzbm1meCJ9.wVLjaWeqoQ235YTL4n_CwQ';
@@ -138,7 +140,7 @@
         
 
     </script>  
-    <img src="https://66.media.tumblr.com/57a9b57e3e2b562fd3ef79767d83ba9b/tumblr_pr235t41gZ1rxl92fo1_1280.png">
+    <img src="https://66.media.tumblr.com/0b770be79013dd895229db50f76ddca9/tumblr_pr235t41gZ1rxl92fo1_r1_1280.png">
     
     <hr width="100%">
     <h2 style="text-align:center;">Data Sources</h2>
