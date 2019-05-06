@@ -122,19 +122,19 @@
         map2.addControl(new mapboxgl.FullscreenControl());
         map2.addControl(new mapboxgl.ScaleControl({position: 'bottom-right'}));
         
-        map2.on('click', 'weekday_bc', function(e) {
+        map2.on('click', 'bc', function(e) {
                 new mapboxgl.Popup()
                     .setLngLat(e.lngLat)
                     .setHTML(e.features[0].properties.weekday_bc)
                     .addTo(map2);
             });
             // Change the cursor to a pointer when the mouse is over the states layer.
-            map2.on('mouseenter', 'weekday_bc', function() {
+            map2.on('mouseenter', 'bc', function() {
                 map2.getCanvas().style.cursor = 'pointer';
             });
 
             // Change it back to a pointer when it leaves.
-            map2.on('mouseleave', 'weekday_bc', function() {
+            map2.on('mouseleave', 'bc', function() {
                 map2.getCanvas().style.cursor = '';
             });
         
