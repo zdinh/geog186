@@ -86,10 +86,10 @@
     <img src= "https://66.media.tumblr.com/999eca973810d010040a8cf155f1b2f5/tumblr_pqur07EJjg1rxl92fo1_500h.jpg" width="50%" height="50%">
     
     <h2 style="text-align:center;">Vessel Movement Data</h2>
-    <h3 style="text-align:center;">80,850 data points, 119 unique vessels</h3>
-    <p>Vessel activity was derived from Automatic Identification System (AIS) data. A system used internationally, primarily to prevent vessel collisions. AIS is required for all vessels greater than 300 gross tonnes. Each AIS message contains: MMSI (vessel identifier), BaseDateTime (date and time), LAT (UTM latitude), LON (UTM longitude), along with vessel type, heading, speed and other useful information. We first developed a method to decode raw AIS messages using the Python package libais, and evaluated the decoder using a sample of raw AIS data. We then downloaded a full AIS dataset for June 2017 for UTM Zone 10, a total of 34,187,287 AIS messages.</p> 
+    <h3 style="text-align:center;">80,850 data points, 104 unique vessels</h3>
+    <p>Vessel activity was derived from Automatic Identification System (AIS) data, a vessel tracking system developed prevent collisions. AIS is used internationally and is required for all commercial vessels greater than 300 gross tonnes. Each AIS message contains: MMSI (vessel identifier), BaseDateTime (date and time), LAT (UTM latitude), LON (UTM longitude), along with vessel type, heading, speed and other useful information. We first developed a method to decode raw AIS messages using the Python package libais, and evaluated the decoder using a sample of raw AIS data. We then downloaded a full AIS dataset for June 2017 for UTM Zone 10, a total of 34,187,287 AIS messages.</p> 
     
-    <p>From this dataset we extracted AIS messages located within the study area, yielding 559,596 AIS messages. Further subsetting of AIS messages was then performed by selecting only cargo and tanker vessel type classifications. Our final AIS dataset for June 2017 in the study area was 80,850. We identified 119 vessels based on MMSI. Cumulatively, these 119 vessels operated for a total of 3,497.8 hours at the Port. 156.6 hours was classified as maneuvering (4%), and 3,341.2 hours classified as berthed (96%). We obtained additional vessel characteristics for 108 vessels found in the Marine Traffic database, providing us with vessel dimensions, tonnage, cargo capacity, year built, owner, and builder information.</p>
+    <p>From this dataset we extracted AIS messages located within the study area, yielding 559,596 AIS messages. Further subsetting of AIS messages was then performed by selecting only cargo and tanker vessel type classifications. Our final AIS dataset for June 2017 in the study area was 80,850. We identified 104 vessels based on MMSI. Cumulatively, these 104 vessels operated for a total of 3,497.8 hours at the Port. 156.6 hours was classified as maneuvering (4%), and 3,341.2 hours classified as berthed (96%). We obtained additional vessel characteristics of the 104 vessels found in the Marine Traffic database, providing us with vessel dimensions, tonnage, cargo capacity, year built, owner, and builder information.</p>
 
     <!--<img src="https://www.ttnews.com/sites/default/files/port-of-los-angeles-1200.jpg">-->
     <!--<h5>Freight trucking activity at the Port of Oakland.</h5>-->
@@ -102,7 +102,7 @@
     <hr width="100%">
     <img src= "https://66.media.tumblr.com/c848e5eba0ea23486bddb7fb5051918a/tumblr_pqurnliJIU1rxl92fo1_500h.jpg" width="50%" height="50%">
     <h2 style="text-align:center;">Black Carbon Emissions Modeling</h2>
-    <h3 style="text-align:center;">Estimated 2,266 grams of black carbon generated per week day</h3>
+    <h3 style="text-align:center;">Estimated 8,550 grams of black carbon generated per weekday</h3>
     
     <img src="https://66.media.tumblr.com/6279b5e8e2f55539072d3832a06253bb/tumblr_pqv5pjPSIA1rxl92fo1_1280.jpg">
         <p>From movement data we modeled the amount of black carbon emited from each vesse and vehicle during their operation at the port. From movement data, a vehicle's position, speed, and operating time is factored in to the emssions model. For vessels, MMSI contained in the AIS data allowed us to obtain vessel specific information </p>
@@ -136,8 +136,7 @@
             // Change it back to a pointer when it leaves.
             map2.on('mouseleave', 'bc', function() {
                 map2.getCanvas().style.cursor = '';
-            });
-        
+            }); 
 
     </script>  
     <img src="https://66.media.tumblr.com/9e5c6e9359f4660367bb9a4ce20b525d/tumblr_pr3qr8KHP71rxl92fo1_1280.png">
@@ -150,7 +149,7 @@
     <p>Ground vehicle movement data: Courtesy of Dr. Jane McFarlane, College of Civil & Environmental Engineering</p>
     
     <p>Vessel emissions estimation methodology: <a href="https://www.theicct.org/publications/GHG-emissions-global-shipping-2013-2015">Greenhouse gas emissions from global shipping, 2013–2015, ICCT</a></p>
-    <p><a href="https://github.com/zdinh/zdinh.github.io">White paper</a></p>
+    <p><a href="https://docs.google.com/document/d/1t2EzYCH2qjYqHAM4WXFH2lelrdJYlF_Q8em1WlkvKUU/edit?usp=sharing">White paper</a></p>
     <p><a href="https://github.com/zdinh/zdinh.github.io">Github repository</a></p>
     
     <hr width="100%">
