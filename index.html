@@ -14,7 +14,9 @@
     <h1 style="text-align:center;">Modeling traffic-related black carbon emissions at the Port of Oakland</h1>
     <h4 style="text-align:center;">Zack Dinh | Sam Fernandes | Rebecca Sugrue | Dajie Sun</h4>
     <hr width="100%">
-    <p>Traffic-related emissions related to diesel activity from maritime vessels and ground vehicles originating from the <a href="https://www.portofoakland.com/"> Port of Oakland</a> is <a href="https://www.arb.ca.gov/ch/communities/ra/westoakland/documents/westoaklandreport.pdf">harmful</a> to the environment and health of neighboring communities. In this project we analyzed activity at the Port from movement data and modeled the black carbon emissions of this activity using vehicle and engine characteristics. We belive this method provides valuable and independent monitoring capability. The first map presents a composite of the the available vehicle activity at the Port for one month (vessels: June 2017, ground vehicles: January 2019). The second map presents the estimated amount of black carbon produced by vessel and vehicle activity for one month.</p>
+    <p>Traffic-related emissions related to diesel activity from maritime vessels and ground vehicles originating from the <a href="https://www.portofoakland.com/"> Port of Oakland</a> is <a href="https://www.arb.ca.gov/ch/communities/ra/westoakland/documents/westoaklandreport.pdf">harmful</a> to the environment and health of neighboring communities. In this project we analyzed activity at the Port from movement data and modeled the black carbon emissions of this activity using vehicle and engine characteristics. We believe this method provides valuable and independent monitoring capability. The first map presents a composite of the the available vehicle activity at the Port for one month (vessels: June 2017, ground vehicles: January 2019). The second map presents the estimated amount of black carbon produced by vessel and vehicle activity for one month.
+
+</p>
     <p> </p>
     <img src="https://66.media.tumblr.com/65c218846899b6ec5cd9b9a408198303/tumblr_pquehg5AC01rxl92fo1_1280.png">
     <hr width="100%">
@@ -87,7 +89,9 @@
     
     <h2 style="text-align:center;">Vessel Movement Data</h2>
     <h3 style="text-align:center;">80,850 data points, 104 unique vessels</h3>
-    <p>Vessel activity was derived from Automatic Identification System (AIS) data, a vessel tracking system developed prevent collisions. AIS is used internationally and is required for all commercial vessels greater than 300 gross tonnes. Each AIS message contains: MMSI (vessel identifier), BaseDateTime (date and time), LAT (UTM latitude), LON (UTM longitude), along with vessel type, heading, speed and other useful information. We first developed a method to decode raw AIS messages using the Python package libais, and evaluated the decoder using a sample of raw AIS data. We then downloaded a full AIS dataset for June 2017 for UTM Zone 10, a total of 34,187,287 AIS messages.</p> 
+    <p>
+Vessel movement data was sourced from Automatic Identification System (AIS) data, a vessel monitoring system used internationally to prevent vessel collisions. Required for all commercial vessels greater than 300 gross tonnes, AIS transmits a vessel's latitude and longitude position, a vessel's unique identification number (MMSI), vessel type, and many other useful information. We first developed a method to decode raw AIS messages using the Python package libais, and evaluated the decoder using a sample of raw AIS data. We then downloaded a full AIS dataset for June 2017 for UTM Zone 10, a total of 34,187,287 AIS messages.
+</p>
     
     <p>From this dataset we extracted AIS messages located within the study area, yielding 559,596 AIS messages. Further subsetting of AIS messages was then performed by selecting only cargo and tanker vessel type classifications. Our final AIS dataset for June 2017 in the study area was 80,850. We identified 104 vessels based on MMSI. Cumulatively, these 104 vessels operated for a total of 3,497.8 hours at the Port. 156.6 hours was classified as maneuvering (4%), and 3,341.2 hours classified as berthed (96%). We obtained additional vessel characteristics of the 104 vessels found in the Marine Traffic database, providing us with vessel dimensions, tonnage, cargo capacity, year built, owner, and builder information.</p>
 
@@ -97,15 +101,18 @@
     
     <img src= "https://66.media.tumblr.com/2ea71269bae0202f8b2af5ebfa8252b9/tumblr_pquqzdtBwK1rxl92fo1_500h.jpg" width="50%" height="50%">
     <h2 style="text-align:center;">Ground Vehicle Movement Data</h2>
-    <h3 style="text-align:center;">487,410 data points, 6,336 unique vehicles</h3>
-    <p>Ground vehicle probe data was provided by Dr. Jane McFarlane for the month of January 2019 (January 1-30). From the original data set of x points we extracted x points within the Port of Oakland study area.</p>
+    <h3 style="text-align:center;">487,410 data points, 2,082 unique vehicles</h3>
+    <p>Ground vehicle movement data was provided by Dr. Jane McFarlane for January 2019. This dataset containing 1,709,047 data points was a conglomeration of multiple vehicle fleets, with large variation in data quality. Subsetting the original data set to the study area resulted in 487,410 data points. Although the dataset contained a large amount of points, inconsistent signal intervals made identification of unique vehicle trips challenging. We chose to select trips that began and ended at one of the three Port entrances, further decreasing the overall size of the ground vehicle data set to 120,700 data points, 398 vehicles, 661 trips for January 2019. For emissions modeling we increased the amount of ground vehicle activity based on an estimate of 3,000 daily truck visits to the port.
+    </p>
+
     <hr width="100%">
     <img src= "https://66.media.tumblr.com/c848e5eba0ea23486bddb7fb5051918a/tumblr_pqurnliJIU1rxl92fo1_500h.jpg" width="50%" height="50%">
     <h2 style="text-align:center;">Black Carbon Emissions Modeling</h2>
-    <h3 style="text-align:center;">Estimated 8,550 grams of black carbon generated per weekday</h3>
+    <h3 style="text-align:center;">Estimated 23,756 grams of black carbon generated per weekday</h3>
     
     <img src="https://66.media.tumblr.com/6279b5e8e2f55539072d3832a06253bb/tumblr_pqv5pjPSIA1rxl92fo1_1280.jpg">
-        <p>From movement data we modeled the amount of black carbon emited from each vesse and vehicle during their operation at the port. From movement data, a vehicle's position, speed, and operating time is factored in to the emssions model. For vessels, MMSI contained in the AIS data allowed us to obtain vessel specific information </p>
+
+    <p>We modeled black carbon emissions for both vessels and vehicles using velocity and delta-time calculated between each data point. For vehicles, an average fleet emission rate was used. For vessels, vessel-specific factors based on MMSI was used. The map below displays the location and concentration of black carbon emission at the port. Developing a baseline black carbon emission estimate provides the basis for further atmospheric modeling of emissions dispersal as well as the the development of of emissions reduction scenarios.</p>
     <hr width="100%">
     <h2 style="text-align:center;">Estimation of black carbon emissions at the Port of Oakland</h2>
 
@@ -148,7 +155,6 @@
     <p>Vessel movement data: <a href="https://marinecadastre.gov/ais/"> MarineCadastre.gov</a></p>
     <p>Ground vehicle movement data: Courtesy of Dr. Jane McFarlane, College of Civil & Environmental Engineering</p>
     
-    <p>Vessel emissions estimation methodology: <a href="https://www.theicct.org/publications/GHG-emissions-global-shipping-2013-2015">Greenhouse gas emissions from global shipping, 2013–2015, ICCT</a></p>
     <p><a href="https://docs.google.com/document/d/1t2EzYCH2qjYqHAM4WXFH2lelrdJYlF_Q8em1WlkvKUU/edit?usp=sharing">White paper</a></p>
     <p><a href="https://github.com/zdinh/zdinh.github.io">Github repository</a></p>
     
