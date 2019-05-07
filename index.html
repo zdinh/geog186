@@ -17,7 +17,7 @@
         <p> </p>
       <p> </p>
         <img src="https://66.media.tumblr.com/65c218846899b6ec5cd9b9a408198303/tumblr_pquehg5AC01rxl92fo1_1280.png">
-    <p>Traffic-related emissions related to diesel activity from maritime vessels and ground vehicles originating from the <a href="https://www.portofoakland.com/"> Port of Oakland</a> is <a href="https://www.arb.ca.gov/ch/communities/ra/westoakland/documents/westoaklandreport.pdf">harmful</a> to the environment and health of neighboring communities. In this project we analyzed activity at the Port from movement data and modeled the black carbon emissions of this activity using vehicle and engine characteristics. We believe this method provides valuable and independent monitoring capability. The first map presents a composite of the the available vehicle activity at the Port for one month (vessels: June 2017, ground vehicles: January 2019). The second map presents the estimated amount of black carbon produced by vessel and vehicle activity for one month.
+    <p>Traffic-related emissions related to diesel activity from maritime vessels and ground vehicles originating from the <a href="https://www.portofoakland.com/"> Port of Oakland</a> is <a href="https://www.arb.ca.gov/ch/communities/ra/westoakland/documents/westoaklandreport.pdf">harmful</a> to the environment and health of neighboring communities. In this project we estimate emissions of <a href="https://www.epa.gov/air-research/black-carbon-research">black carbon</a>, a sooty black material that has negative implications for both human health and climate. Inhalation of black carbon is associated with health problems including respiratory and cardiovascular disease, cancer, and even birth defects. We analyzed vessel and ground vehicle activity at the Port from movement data and modeled the black carbon emissions of this activity using vehicle, fuel, and engine characteristics. We believe this method provides valuable and independent monitoring capability. The first map presents a composite of the the available vehicle activity at the Port for one month (vessels: June 2017, ground vehicles: January 2019). The second map presents the estimated amount of black carbon produced by vessel and vehicle activity for one month.
 
 </p>
     <p> </p>
@@ -104,7 +104,7 @@ Vessel movement data was sourced from Automatic Identification System (AIS) data
     <img src= "https://66.media.tumblr.com/2ea71269bae0202f8b2af5ebfa8252b9/tumblr_pquqzdtBwK1rxl92fo1_500h.jpg" width="50%" height="50%">
     <h2 style="text-align:center;">Ground Vehicle Movement Data</h2>
     <h3 style="text-align:center;">487,410 data points, 2,082 unique vehicles</h3>
-    <p>Ground vehicle movement data was provided by Dr. Jane McFarlane for January 2019. This dataset containing 1,709,047 data points was a conglomeration of multiple vehicle fleets, with large variation in data quality. Subsetting the original data set to the study area resulted in 487,410 data points. Although the dataset contained a large amount of points, inconsistent signal intervals made identification of unique vehicle trips challenging. We chose to select trips that began and ended at one of the three Port entrances, further decreasing the overall size of the ground vehicle data set to 120,700 data points, 398 vehicles, 661 trips for January 2019. For emissions modeling we increased the amount of ground vehicle activity based on an estimate of 3,000 daily truck visits to the port.
+    <p>Ground vehicle movement data was provided by Dr. Jane McFarlane for January 2019. This dataset containing 1,709,047 data points from 2,473 unique vehicle identities, was a conglomeration of multiple vehicle fleets, with large variation in data quality. Subsetting the original dataset to the study area resulted in 487,410 data points. Although the dataset contained a large amount of points, inconsistent signal intervals made identification of unique vehicle trips challenging. We chose to only select trips that began and ended at one of the three Port entrances, further decreasing the overall size of the ground vehicle dataset to 120,700 data points, 398 vehicles, 661 trips for January 2019. For emissions modeling we increased the amount of ground vehicle activity based on an estimate of <a href="https://www.ttnews.com/articles/oakland-port-truck-management-plan-nears-final-approval">3,000</a> daily truck visits to the Port.
     </p>
 
     <hr width="100%">
@@ -114,7 +114,7 @@ Vessel movement data was sourced from Automatic Identification System (AIS) data
     
     <img src="https://66.media.tumblr.com/6279b5e8e2f55539072d3832a06253bb/tumblr_pqv5pjPSIA1rxl92fo1_1280.jpg">
 
-    <p>We modeled black carbon emissions for both vessels and vehicles using velocity and delta-time calculated between each data point. For vehicles, an average fleet emission rate was used. For vessels, vessel-specific factors based on MMSI was used. The map below displays the location and concentration of black carbon emission at the port. Developing a baseline black carbon emission estimate provides the basis for further atmospheric modeling of emissions dispersal as well as the the development of of emissions reduction scenarios.</p>
+    <p>We modeled black carbon emissions for both vessels and vehicles using velocity and delta-time calculated between each data point. For vehicles, an average fleet emission rate was used. For vessels, vessel-specific factors based on MMSI was used. The map below displays the location and concentration of black carbon emission at the Port. Developing a baseline black carbon emission estimate provides the basis for further atmospheric modeling of emissions dispersal as well as the the development of of emissions reduction scenarios. Our analysis provides support that vessel emisisons are a significant contributor of black carbon emissions even while berthed due to onboard power demand provided by auxillary diesel power. The provision of shore power (electrical power) by the Port of Oakland as of 2019 has reached <a href= "https://www.oaklandseaport.com/development-programs/shore-power/">70% utilization.</a> With a goal of 90% utilization by 2020, action is being taken by the Port of Oakland to reduce emissions. </p>
     <hr width="100%">
     <h2 style="text-align:center;">Estimation of black carbon emissions at the Port of Oakland</h2>
 
@@ -131,19 +131,19 @@ Vessel movement data was sourced from Automatic Identification System (AIS) data
         map2.addControl(new mapboxgl.FullscreenControl());
         map2.addControl(new mapboxgl.ScaleControl({position: 'bottom-right'}));
         
-        map2.on('click', 'bc', function(e) {
+        map2.on('click', 'bc-7mpap4', function(e) {
                 new mapboxgl.Popup()
                     .setLngLat(e.lngLat)
-                    .setHTML(e.features[0].properties.weekday_bc)
+                    .setHTML(e.features[0].properties.weekday)
                     .addTo(map2);
             });
             // Change the cursor to a pointer when the mouse is over the states layer.
-            map2.on('mouseenter', 'bc', function() {
+            map2.on('mouseenter', 'bc-7mpap4', function() {
                 map2.getCanvas().style.cursor = 'pointer';
             });
 
             // Change it back to a pointer when it leaves.
-            map2.on('mouseleave', 'bc', function() {
+            map2.on('mouseleave', 'bc-7mpap4', function() {
                 map2.getCanvas().style.cursor = '';
             }); 
 
