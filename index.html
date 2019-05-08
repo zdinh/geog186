@@ -116,14 +116,14 @@ Vessel movement data was sourced from Automatic Identification System (AIS) data
 
     <p>We modeled black carbon emissions for both vessels and vehicles using velocity and delta-time calculated between each data point. For vehicles, an average fleet emission rate was used. For vessels, vessel-specific factors based on MMSI was used. The map below displays the location and concentration of black carbon emission at the Port. Developing a baseline black carbon emission estimate provides the basis for further atmospheric modeling of emissions dispersal as well as the the development of of emissions reduction scenarios. Our analysis provides support that vessel emisisons are a significant contributor of black carbon emissions even while berthed due to onboard power demand provided by auxillary diesel power. The provision of shore power (electrical power) by the Port of Oakland as of 2019 has reached <a href= "https://www.oaklandseaport.com/development-programs/shore-power/">70% utilization.</a> With a goal of 90% utilization by 2020, action is being taken by the Port of Oakland to reduce emissions. </p>
     <hr width="100%">
-    <h2 style="text-align:center;">Estimation of black carbon emissions at the Port of Oakland</h2>
+    <h2 style="text-align:center;">Average Weekday Estimation of Black Carbon</h2>
 
     <div id="map2" style="width: 100%; height: 700px"></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiemFja2RpbmgiLCJhIjoiY2p0ZGoxMjc2MTd0azQzbW9zNWUzbm1meCJ9.wVLjaWeqoQ235YTL4n_CwQ';
         var map2 = new mapboxgl.Map({
             container: 'map2',
-            style: 'mapbox://styles/zackdinh/cjv661vcn0rj71fqx5kqm7fq1',
+            style: 'mapbox://styles/zackdinh/cjvfk0wbs1s141fmxxzy5k7s0',
             center: [-122.313, 37.809],
             zoom: 13,
         });   
@@ -134,7 +134,7 @@ Vessel movement data was sourced from Automatic Identification System (AIS) data
         map2.on('click', 'bc-7mpap4', function(e) {
                 new mapboxgl.Popup()
                     .setLngLat(e.lngLat)
-                    .setHTML(e.features[0].properties.weekday)
+                    .setHTML(e.features[0].properties.weekday_l)
                     .addTo(map2);
             });
             // Change the cursor to a pointer when the mouse is over the states layer.
@@ -148,7 +148,7 @@ Vessel movement data was sourced from Automatic Identification System (AIS) data
             }); 
 
     </script>  
-    <img src="https://66.media.tumblr.com/9e5c6e9359f4660367bb9a4ce20b525d/tumblr_pr3qr8KHP71rxl92fo1_1280.png">
+    <img src="https://66.media.tumblr.com/6608334636db75c99913d95ad7a062f9/tumblr_pr3qr8KHP71rxl92fo1_r1_500h.jpg">
     
     <hr width="100%">
     <h2 style="text-align:center;">Data Sources</h2>
@@ -158,7 +158,7 @@ Vessel movement data was sourced from Automatic Identification System (AIS) data
     <p>Ground vehicle movement data: Courtesy of Dr. Jane McFarlane, College of Civil & Environmental Engineering</p>
     
     <p><a href="https://docs.google.com/document/d/1t2EzYCH2qjYqHAM4WXFH2lelrdJYlF_Q8em1WlkvKUU/edit?usp=sharing">White paper</a></p>
-    <p><a href="https://github.com/zdinh/zdinh.github.io">Github repository</a></p>
+
     
     <hr width="100%">
     <p style="text-align:center;">Spring 2019 | GEOG 186 Web Cartogrpahy | CE 263 N Scalable Spatial Analytics | University of California, Berkeley</p>
